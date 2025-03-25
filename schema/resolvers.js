@@ -22,6 +22,24 @@ const resolvers = {
             const movie = _.find(MovieList , {id : Number(id)});
             return movie
         }
+    },
+    Mutation:{
+        createUser: (parent , args)=>{
+            const user = args.input;
+            // console.log(user);
+            const lastId = UserList[UserList.length - 1].id;
+            user.id = lastId + 1;
+            UserList.push(user);
+            return user
+        },
+        updateUsername: (parent , args)=>{
+            const user = args.input;
+            const id = user.id;
+            const updatedUser = _.find(UserList , {id : Number(id)});
+            updatedUser.username = user.username;
+            console.log(updatedUser)
+            return updatedUser
+        }
     }
 }
 module.exports = {
